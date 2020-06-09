@@ -12,7 +12,7 @@ The build tool [teapot] needs to be installed (which requires [Ruby]):
 
 	$ gem install teapot
 
-[teapot]: https://teapot.nz/
+[teapot]: https://github.com/kurocha/teapot
 [Ruby]: https://www.ruby-lang.org/en/downloads/
 
 ### Dependencies
@@ -28,12 +28,6 @@ Run the tests to confirm basic functionality:
 
 	$ cd splines
 	$ teapot Test/Splines
-
-## Usage
-
-You can run the tool by executing the following:
-
-	$ teapot Run/Splines
 
 ## Contributing
 

@@ -1,0 +1,25 @@
+name: Development
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    
+    - uses: kurocha/setup-cpp@master
+    
+    - name: Install teapot
+      run: gem install teapot
+    
+    - name: Fetch packages
+      run: teapot fetch
+    
+    - name: Run tests
+      run: teapot Test/Splines

@@ -1,4 +1,0 @@
-
-namespace Splines {
-	void sing();
-}

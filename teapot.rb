@@ -4,12 +4,15 @@ required_version "3.0"
 
 define_project "splines" do |project|
 	project.title = "Splines"
+	project.license = "MIT License"
 end
 
 # Build Targets
 
 define_target 'splines-library' do |target|
-	target.depends 'Language/C++14'
+	target.depends 'Language/C++17'
+	
+	target.depends "Library/Numerics", public: true
 	
 	target.provides 'Library/Splines' do
 		source_root = target.package.path + 'source'
@@ -30,31 +33,7 @@ define_target 'splines-test' do |target|
 	target.provides 'Test/Splines' do |arguments|
 		test_root = target.package.path + 'test'
 		
-		run tests: 'Splines', source_files: test_root.glob('Splines/**/*.cpp'), arguments: arguments
-	end
-end
-
-define_target 'splines-executable' do |target|
-	target.depends 'Library/Splines'
-	
-	target.depends 'Language/C++14'
-	
-	target.provides 'Executable/Splines' do
-		source_root = target.package.path + 'source'
-		
-		executable_path = build executable: 'Splines', source_files: source_root.glob('Splines.cpp')
-		
-		splines_executable executable_path
-	end
-end
-
-define_target 'splines-run' do |target|
-	target.depends 'Executable/Splines'
-	
-	target.depends :executor
-	
-	target.provides 'Run/Splines' do |*arguments|
-		run executable_file: environment[:splines_executable], arguments: arguments
+		run source_files: test_root.glob('Splines/**/*.cpp'), arguments: arguments
 	end
 end
 
@@ -74,9 +53,11 @@ define_configuration 'development' do |configuration|
 	configuration.require 'generate-cpp-class'
 	
 	configuration.require "generate-project"
-	configuration.require "geometry"
 end
 
 define_configuration "splines" do |configuration|
 	configuration.public!
+	
+	configuration.require "numerics"
+	configuration.require "geometry"
 end
