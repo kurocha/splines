@@ -29,6 +29,10 @@ namespace Splines
 		Spline(const Polyline & polyline) noexcept : _polyline(polyline) {}
 		virtual ~Spline() {}
 		
+		auto size() const noexcept {
+			return _polyline.size();
+		}
+		
 		int starting_index(Time time) const noexcept {
 			// The starting point for a given t in [0.0, 1.0]
 			return (_polyline.size() - 1) * time;

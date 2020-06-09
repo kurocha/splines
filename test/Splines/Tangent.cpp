@@ -31,5 +31,19 @@ namespace Splines
 				examiner.expect(tangent[0.5]).to(be == Point{1.0, 0.0});
 			}
 		},
+		
+		{"it can compute nominal times",
+			[](UnitTest::Examiner & examiner) {
+				using Point = Polyline<2>::Point;
+				
+				Polyline<2> polyline({{0.0, 0.0}, {1.0, 0.0}});
+				Spline spline(polyline);
+				Tangent tangent(spline);
+				
+				auto times = tangent.times_for_segments();
+				
+				examiner.expect(times).to(be_sequence(0.0, 0.5, 1.0));
+			}
+		},
 	};
 }
