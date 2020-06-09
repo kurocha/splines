@@ -16,8 +16,7 @@ namespace Splines
 	class CubicSpline : public Spline<Polyline>
 	{
 	public:
-		using Spline<Polyline>::Spline;
-		virtual ~CubicSpline() {}
+		CubicSpline(const Polyline & polyline) noexcept : Spline<Polyline>(polyline) {}
 		
 		using Point = typename Spline<Polyline>::Point;
 		using Time = typename Spline<Polyline>::Time;
