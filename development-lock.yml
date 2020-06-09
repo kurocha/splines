@@ -47,3 +47,9 @@ executor-unix:
 executor-lldb:
   :commit: 75f65ccadcf08aaed5694870c31556fbd656427a
   :branch: master
+platform-linux:
+  :commit: a1115ce55e978e3c638ebe7bd1a9e5cb5b7cfed4
+  :branch: master
+build-linux:
+  :commit: 1d9e9a5ade9b5817dd9f5c2cb4f5f43883a64c66
+  :branch: master

@@ -10,6 +10,6 @@
 
 namespace Splines
 {
-	template class Spline<2>;
-	template class Spline<3>;
+	template class Spline<Polyline<2>>;
+	template class Spline<Polyline<3>>;
 }

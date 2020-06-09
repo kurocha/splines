@@ -8,30 +8,36 @@
 
 #pragma once
 
-#include <vector>
-#include <Numerics/Vector.hpp>
+#include <algorithm>
+#include "Polyline.hpp"
 
 namespace Splines
 {
 	template <std::size_t D>
-	class Polygon
+	class Polygon : private Polyline<D>
 	{
 	public:
-		typedef Numerics::Vector<D> Point;
-		typedef std::vector<Point> Points;
+		using typename Polyline<D>::Point;
+		using typename Polyline<D>::Points;
 		
-		Polygon(const Points && points, bool closed = true) noexcept : _points(points), _closed(closed) {}
-		~Polygon() noexcept {}
+		using Polyline<D>::Polyline;
 		
-		const Points& points() const noexcept {return _points;}
-		bool closed() const noexcept {return _closed;}
+		using Polyline<D>::points;
 		
-		std::size_t size() const noexcept {return _points.size() + (_closed ? 1 : 0);}
-		Point operator[](std::size_t index) const noexcept {return _points[index % _points.size()];}
+		std::size_t size() const noexcept {
+			return this->_points.size() + 1;
+		}
 		
-	protected:
-		Points _points;
-		bool _closed;
+		Point operator[](int index) const noexcept {
+			auto size = this->_points.size();
+			index = index % (int)size;
+			
+			if (index < 0) {
+				index += size;
+			}
+			
+			return this->_points[index];
+		}
 	};
 	
 	extern template class Polygon<2>;

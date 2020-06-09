@@ -12,15 +12,15 @@
 
 namespace Splines
 {
-	template <std::size_t D>
-	class CubicSpline : public Spline<D>
+	template <typename Polyline>
+	class CubicSpline : public Spline<Polyline>
 	{
 	public:
-		using Spline<D>::Spline;
+		using Spline<Polyline>::Spline;
 		virtual ~CubicSpline() {}
 		
-		using Point = typename Spline<D>::Point;
-		using Time = typename Spline<D>::Time;
+		using Point = typename Spline<Polyline>::Point;
+		using Time = typename Spline<Polyline>::Time;
 		
 		Point operator[](Time time) const noexcept{
 			std::size_t starting_index = this->starting_index(time);
@@ -28,14 +28,14 @@ namespace Splines
 			
 			return Numerics::Interpolate::cubic(
 				fractional_component,
-				this->_polygon[starting_index-1],
-				this->_polygon[starting_index],
-				this->_polygon[starting_index+1],
-				this->_polygon[starting_index+2]
+				this->_polyline[starting_index-1],
+				this->_polyline[starting_index],
+				this->_polyline[starting_index+1],
+				this->_polyline[starting_index+2]
 			);
 		}
 	};
 	
-	extern template class CubicSpline<2>;
-	extern template class CubicSpline<3>;
+	extern template class CubicSpline<Polyline<2>>;
+	extern template class CubicSpline<Polyline<3>>;
 }

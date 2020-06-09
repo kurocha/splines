@@ -2,7 +2,7 @@
 //  Polygon.cpp
 //  This file is part of the "Splines" project and released under the MIT License.
 //
-//  Created by Samuel Williams on 9/6/2020.
+//  Created by Samuel Williams on 10/6/2020.
 //  Copyright, 2020, by Samuel Williams. All rights reserved.
 //
 
@@ -23,8 +23,9 @@ namespace Splines
 				
 				Polygon<2> polygon({
 					{0, 0}, {1, 0}, {0, 1}
-				}, true);
+				});
 				
+				examiner.expect(polygon[-1]).to(be == Point{0, 1});
 				examiner.expect(polygon[0]).to(be == Point{0, 0});
 				examiner.expect(polygon[1]).to(be == Point{1, 0});
 				examiner.expect(polygon[2]).to(be == Point{0, 1});

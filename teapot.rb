@@ -25,10 +25,10 @@ define_target 'splines-library' do |target|
 end
 
 define_target 'splines-test' do |target|
+	target.depends 'Language/C++17'
+	
 	target.depends 'Library/Splines'
 	target.depends 'Library/UnitTest'
-	
-	target.depends 'Language/C++14'
 	
 	target.provides 'Test/Splines' do |arguments|
 		test_root = target.package.path + 'test'
